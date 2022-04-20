@@ -18,7 +18,7 @@ const Index = ({ player }) => {
     }
   };
   return (
-    <div>
+    <div className="leaderboard">
       <h1>
         <Link href="/newPlayer">
           <button className="newFormButton">
@@ -57,7 +57,7 @@ export async function getServerSideProps() {
   await dbConnect();
 
   /* find all the data  our database */
-  const result = await Snake_player.find().sort( { "_id": -1 } )
+  const result = await Snake_player.find().sort([['score', 'descending']])
   const player = result.map((doc) => {
     const player = doc.toObject();
     player._id = player._id.toString();

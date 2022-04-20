@@ -10,9 +10,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <div className="top-bar">
-        <h1>Snake Game</h1>
       </div>
       <div className=" wrapper ">
+        
         <Component {...pageProps} />
       </div>
     </div>

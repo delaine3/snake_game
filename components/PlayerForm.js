@@ -45,21 +45,24 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       currentSnake.forEach((index) =>
         tile_grid[index].classList.remove("snake")
       );
+
       tile_grid[appleIndex].classList.remove("apple");
       scoreDisplay.innerText = score;
       currentIndex = 0;
+
       currentSnake.forEach((index) => tile_grid[index].classList.add("snake"));
       moveOutcomes();
+      if (!apple_present) {
+        randomApple();
+        set_apple_present(true);
+      }
     }
   }, [start_called, timer]);
 
   useEffect(() => {
     if (start_called) {
       moveOutcomes();
-      if (!apple_present) {
-        randomApple();
-        set_apple_present(true);
-      }
+      
     }
   }, [direction]);
 
@@ -92,50 +95,48 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   //function that deals with ALL the ove outcomes of the Snake
   function moveOutcomes() {
     let tile_grid = document.querySelectorAll(".tile");
-    let endGame = false
-if(!gameOver){
-    //deals with snake hitting border and snake hitting self
-    if (
-      (currentSnake[0] + width >= width * width && direction === width) || //if snake hits bottom
-      (currentSnake[0] % width === width - 1 && direction === 1) || //if snake hits right wall
-      (currentSnake[0] % width === 0 && direction === -1) || //if snake hits left wall
-      (currentSnake[0] - width < 0 && direction === -width) || //if snake hits the top
-      tile_grid[currentSnake[0] + direction].classList.contains("snake") //if snake goes into itself
-    ) {
-      console.log("HIT BORDER ");
-      clearTimeout(game_timer);
-endGame = true
-      setGameOver(true)
+    let endGame = false;
+    if (!gameOver) {
+      //deals with snake hitting border and snake hitting self
+      if (
+        (currentSnake[0] + width >= width * width && direction === width) || //if snake hits bottom
+        (currentSnake[0] % width === width - 1 && direction === 1) || //if snake hits right wall
+        (currentSnake[0] % width === 0 && direction === -1) || //if snake hits left wall
+        (currentSnake[0] - width < 0 && direction === -width) || //if snake hits the top
+        tile_grid[currentSnake[0] + direction].classList.contains("snake") //if snake goes into itself
+      ) {
+        clearTimeout(game_timer);
+        endGame = true;
+        setGameOver(true);
+      }
+
+      const tail = currentSnake.pop(); //removes last ite of the array and shows it
+      tile_grid[tail].classList.remove("snake"); //removes class of snake from the TAIL
+      tile_grid[tail].classList.remove("head"); //removes class of snake from the TAIL
+
+      currentSnake.unshift(currentSnake[0] + direction) //gives direction to the head of the array
+      const scoreDisplay = document.querySelector(".score");
+
+      //deals with snake getting apple
+      var snake_head = tile_grid[currentSnake[0]];
+      console.log(tile_grid[currentSnake[0]]);
+      if (!endGame) {
+        if (snake_head.classList.contains("apple")) {
+          set_apple_present(false);
+
+          snake_head.classList.remove("apple");
+          tile_grid[tail].classList.add("snake");
+          currentSnake.push(tail);
+          set_score(score + 1);
+          scoreDisplay.textContent = score;
+          clearTimeout(game_timer);
+        }
+        snake_head.classList.add("snake");
+        snake_head.classList.add("head");
+
+
+      }
     }
-
-    const tail = currentSnake.pop(); //removes last ite of the array and shows it
-    tile_grid[tail].classList.remove("snake"); //removes class of snake from the TAIL
-    currentSnake.unshift(currentSnake[0] + direction); //gives direction to the head of the array
-    const scoreDisplay = document.querySelector(".score");
-
-    //deals with snake getting apple
-    var snake_head = tile_grid[currentSnake[0]];
-
-    console.log(tile_grid[currentSnake[0]]);
-if(!endGame){
-    if (snake_head.classList.contains("apple")) {
-      set_apple_present(false);
-
-      snake_head.classList.remove("apple");
-      tile_grid[tail].classList.add("snake");
-      currentSnake.push(tail);
-      set_score(score + 1);
-      scoreDisplay.textContent = score;
-      clearTimeout(game_timer);
-
-      // clearInterval(interval);
-      // intervalTime = intervalTime * speed;
-      // interval = setInterval(moveOutcomes, intervalTime);
-    }
-    snake_head.classList.add("snake");
-
-  }
-  }
   }
   //assign functions to keycodes
   function control(e) {
@@ -145,17 +146,12 @@ if(!endGame){
 
     if (e.keyCode === 39) {
       set_direction(1); //if we press the right arrow on our keyboard, the snake will go right one
-      console.log("Right " + direction + " Current snake :" + currentSnake);
     } else if (e.keyCode === 38) {
       set_direction(-width); // if we press the up arrow, the snake will go back ten divs, appearing to go up
-      console.log("Up " + direction + " Current snake :" + currentSnake);
     } else if (e.keyCode === 37) {
       set_direction(-1); // if we press left, the snake will go left one div
-      console.log("Left " + direction + " Current snake :" + currentSnake);
     } else if (e.keyCode === 40) {
       set_direction(width); //if we press down, the snake head will instantly appear in the div ten divs from where you are now
-
-      console.log("Down " + direction + " Current snake :" + currentSnake);
     }
   }
   /* The POST method adds a new entry in the mongodb database. */
@@ -201,7 +197,9 @@ if(!endGame){
   };
 
   return (
-    <div>
+    <div className="game">
+      <h1 className="title">Snake Game</h1>
+
       <h1>
         <Link href="/">
           <button className="newFormButton">
@@ -223,7 +221,7 @@ if(!endGame){
               Type in the name of the player if you would you like to save the
               result of this game.
             </h2>
-            <label htmlFor="player">Player</label>
+            <label htmlFor="player">Player name</label>
             <input
               type="text"
               name="player"
@@ -238,7 +236,7 @@ if(!endGame){
       ) : null}
 
       {!gameOver && !showPlayerForm ? (
-        <div className="game">
+        <div >
           {start_called ? (
             <div>
               {pause_called ? (
