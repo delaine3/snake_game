@@ -13,7 +13,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const [gameOver, setGameOver] = useState(false);
   const [timer, setTimer] = useState(0);
   const [start_called, setStart_called] = useState(false);
-  const [pause_called, setPause_called] = useState(false);
   const [showPlayerForm, set_showPlayerForm] = useState(true);
   const [direction, set_direction] = useState(1);
   const [speed, set_speed] = useState(1000);
@@ -23,8 +22,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const [score, set_score] = useState(0);
   const width = 10;
   let currentIndex = 0; 
-  let appleIndex = 0; //so first div in our grid
-
+  let appleIndex = 0; 
 
   const game_timer = setTimeout(() => {
     if (inProgress) {
@@ -83,9 +81,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   function randomApple() {
     let tile_grid = document.querySelectorAll(".tile");
     do {
-      appleIndex = Math.floor(Math.random() * tile_grid.length);
-    } while (tile_grid[appleIndex].classList.contains("snake")); //making sure apples dont appear on the snake
-    tile_grid[appleIndex].classList.add("apple");
+      appleIndex = Math.floor(Math.random() * tile_grid.length); //Call this function until it lands on a tile that does not contain the snake class
+    } while (tile_grid[appleIndex].classList.contains("snake"));
+    tile_grid[appleIndex].classList.add("apple"); //Once a suitable tile has been found, give it the snake class
   }
   const start = () => {
     setStart_called(true);
