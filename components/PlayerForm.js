@@ -22,10 +22,13 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const width = 10;
   let currentIndex = 0; //so first div in our grid
   let appleIndex = 0; //so first div in our grid
-  let speed = 0.9;
-  let intervalTime = 0;
-  let interval = 0;
 
+ useEffect(() => {
+   if(inProgress){
+    window.addEventListener('keydown', (event) => {
+   control(event)
+    })}
+  }, [inProgress]);
   const game_timer = setTimeout(() => {
     if (inProgress) {
       setTimer(timer + 1);
@@ -177,7 +180,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
 
       router.push("/");
     } catch (error) {
-      setMessage("Failed to add player");
+      alert ("Failed to add player");  
     }
   };
 
@@ -261,7 +264,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
             <div id="tile-grid" className="grid">
               {tileGrid}
 
-              <input type="text" onKeyDown={control} />
             </div>
           ) : null}
         </div>

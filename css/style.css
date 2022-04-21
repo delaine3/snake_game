@@ -22,20 +22,16 @@ button {
   margin: 1%;
   float: center;
   padding: 5px;
-  background-color: rgba(220, 255, 238, 0.664) fdbb;
+  background-color: rgba(220, 255, 238, 0.664);
   box-shadow: 0 0 5px 5px #07b82d9f;
   border-radius: 10px;
   font-size: 125%;
 }
 button:hover {
   color: #ffffff;
-  margin: 1%;
   float: center;
-  padding: 10px;
   background-color: #24d84bf5;
-
   border: 2px solid #ffffff;
-  border-radius: 10px;
 }
 
 a {
@@ -68,7 +64,7 @@ h2 {
   background-color: 0 0 0.5vw 0.5vw #ffc400;
 }
 #start {
-  background-color: #08f1e6;
+  background-color: #08f12fb4;
 }
 button {
   padding: 1%;
