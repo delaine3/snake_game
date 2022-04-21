@@ -16,24 +16,39 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const [pause_called, setPause_called] = useState(false);
   const [showPlayerForm, set_showPlayerForm] = useState(true);
   const [direction, set_direction] = useState(1);
+  const [speed, set_speed] = useState(1000);
+  
   const [currentSnake, set_currentSnake] = useState([2, 1, 0]);
   const [apple_present, set_apple_present] = useState(false);
   const [score, set_score] = useState(0);
   const width = 10;
-  let currentIndex = 0; //so first div in our grid
+  let currentIndex = 0; 
   let appleIndex = 0; //so first div in our grid
 
  useEffect(() => {
-   if(inProgress){
-    window.addEventListener('keydown', (event) => {
-   control(event)
+   if(inProgress && player_name !== ""){
+    window.addEventListener('keydown', (e) => {
+      let tile_grid = document.querySelectorAll(".tile");
+
+
+    tile_grid[currentIndex].classList.remove("snake") != undefined;
+
+    if (e.keyCode === 39) {
+      set_direction(1); //if we press the right arrow on our keyboard, the snake will go right one
+    } else if (e.keyCode === 38) {
+      set_direction(-width); // if we press the up arrow, the snake will go back ten divs, appearing to go up
+    } else if (e.keyCode === 37) {
+      set_direction(-1); // if we press left, the snake will go left one div
+    } else if (e.keyCode === 40) {
+      set_direction(width); //if we press down, the snake head will instantly appear in the div ten divs from where you are now
+    }
     })}
   }, [inProgress]);
   const game_timer = setTimeout(() => {
     if (inProgress) {
       setTimer(timer + 1);
     }
-  }, 1000);
+  }, speed);
 
   useEffect(() => {
     if (gameOver) {
@@ -60,7 +75,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         set_apple_present(true);
       }
     }
-  }, [start_called, timer]);
+  }, [timer]);
 
   useEffect(() => {
     if (start_called) {
@@ -115,14 +130,12 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
 
       const tail = currentSnake.pop(); //removes last ite of the array and shows it
       tile_grid[tail].classList.remove("snake"); //removes class of snake from the TAIL
-      tile_grid[tail].classList.remove("head"); //removes class of snake from the TAIL
 
       currentSnake.unshift(currentSnake[0] + direction) //gives direction to the head of the array
       const scoreDisplay = document.querySelector(".score");
 
       //deals with snake getting apple
       var snake_head = tile_grid[currentSnake[0]];
-      console.log(tile_grid[currentSnake[0]]);
       if (!endGame) {
         if (snake_head.classList.contains("apple")) {
           set_apple_present(false);
@@ -132,10 +145,11 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           currentSnake.push(tail);
           set_score(score + 1);
           scoreDisplay.textContent = score;
+          set_speed(speed * 0.9)
           clearTimeout(game_timer);
+
         }
         snake_head.classList.add("snake");
-        snake_head.classList.add("head");
 
 
       }
@@ -143,20 +157,10 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   }
   //assign functions to keycodes
   function control(e) {
-    let tile_grid = document.querySelectorAll(".tile");
-
-    tile_grid[currentIndex].classList.remove("snake");
-
-    if (e.keyCode === 39) {
-      set_direction(1); //if we press the right arrow on our keyboard, the snake will go right one
-    } else if (e.keyCode === 38) {
-      set_direction(-width); // if we press the up arrow, the snake will go back ten divs, appearing to go up
-    } else if (e.keyCode === 37) {
-      set_direction(-1); // if we press left, the snake will go left one div
-    } else if (e.keyCode === 40) {
-      set_direction(width); //if we press down, the snake head will instantly appear in the div ten divs from where you are now
-    }
+    if(inProgress && !gameOver && start_called ){
+ 
   }
+}
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async () => {
     try {
