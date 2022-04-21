@@ -144,12 +144,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       }
     }
   }
-  //assign functions to keycodes
-  function control(e) {
-    if(inProgress && !gameOver && start_called ){
- 
-  }
-}
+
   /* The POST method adds a new entry in the mongodb database. */
   const postData = async () => {
     try {
@@ -238,7 +233,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
               Start
             </button>
           
-          <h1>Timer : {timer} </h1>
           <h1 className="score">Score : </h1>
 
           {inProgress ? (
