@@ -61,7 +61,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
 
 
   useEffect(() => {
-    if(inProgress && player_name !== ""){
+    if(inProgress && !showPlayerForm){
      window.addEventListener('keydown', (e) => {
        let tile_grid = document.querySelectorAll(".tile");
  
