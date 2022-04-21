@@ -134,7 +134,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           currentSnake.push(tail);
           set_score(score + 1);
           scoreDisplay.textContent = score;
-          set_speed(speed * 0.9)
+          set_speed(speed * 0.95)
           clearTimeout(game_timer);
 
         }
