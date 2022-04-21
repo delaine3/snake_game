@@ -41,7 +41,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   useEffect(() => {
     const scoreDisplay = document.querySelector(".score");
     let tile_grid = document.querySelectorAll(".tile");
-    if (start_called && !gameOver) {
+    if (start_called && !gameOver && inProgress) {
       currentSnake.forEach((index) =>
         tile_grid[index].classList.remove("snake")
       );
@@ -65,7 +65,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
      window.addEventListener('keydown', (e) => {
        let tile_grid = document.querySelectorAll(".tile");
  
- 
+ console.log(inProgress)
      tile_grid[currentIndex].classList.remove("snake");
  
      if (e.keyCode === 39) {
@@ -79,6 +79,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
      }
      })}
    }, [inProgress]);
+   
   function randomApple() {
     let tile_grid = document.querySelectorAll(".tile");
     do {
@@ -91,15 +92,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
     setGameOver(false);
     setInprogress(true);
   };
-  const pause = () => {
-    setPause_called(true);
-    setInprogress(false);
-  };
-  const resume = () => {
-    setPause_called(false);
 
-    setInprogress(true);
-  };
 
   let tileGrid = tileArray.map((tile) => {
     return Tile(tile);
@@ -121,7 +114,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         clearTimeout(game_timer);
         endGame = true;
         setGameOver(true);
-        setInprogress(false)
         setStart_called(false)
       }
 
@@ -241,23 +233,11 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
 
       {!gameOver && !showPlayerForm ? (
         <div >
-          {start_called ? (
-            <div>
-              {pause_called ? (
-                <button id="resume" onClick={resume}>
-                  Resume
-                </button>
-              ) : (
-                <button id="pause" onClick={pause}>
-                  Pause
-                </button>
-              )}
-            </div>
-          ) : (
+        
             <button id="start" onClick={start}>
               Start
             </button>
-          )}
+          
           <h1>Timer : {timer} </h1>
           <h1 className="score">Score : </h1>
 
