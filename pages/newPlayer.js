@@ -3,8 +3,7 @@ import PlayerForm from '../components/PlayerForm'
 const newPlayerForm = () => {
   const players = {
     player:"",
-    player2:"",
-    winner:""
+ score: ""
   }
 
   return <PlayerForm formId="add-player-form" PlayerForm={players} />

@@ -60,9 +60,6 @@ h2 {
   background-color: #ffffff8f;
 }
 
-#pause {
-  background-color: 0 0 0.5vw 0.5vw #ffc400;
-}
 #start {
   background-color: #08f12fb4;
 }
@@ -105,21 +102,19 @@ label {
 .snake {
   background-color: greenyellow;
   border-radius: 37%;
-  width: 10%;
 }
 .head{
-  background-image: url("https://wiki.starbase118.net/wiki/images/1/15/Tribble.png");
+background-repeat: no-repeat;
+  background-image: url("https://image.pngaaa.com/921/89921-small.png");
+background-size: contain;
+  border-radius: 37%;
 }
+
 .apple {
   background-size: contain;
   background-image: url("https://freepngimg.com/thumb/apple/4-png-apple-image-clipart-transparent-png-apple-thumb.png");
 }
-.floor {
-  height: 2vw;
-  border: 1px solid rgb(182, 139, 0);
-  background-color: rgb(124, 95, 0);
-  box-shadow: 0.2vw 0.2vw 1vw rgb(146, 112, 0);
-}
+
 .score-inner-grid {
   display: grid;
   grid-template-columns: auto auto auto auto;

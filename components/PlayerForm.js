@@ -19,7 +19,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   
   const [currentSnake, set_currentSnake] = useState([2, 1]);
   const [apple_present, set_apple_present] = useState(false);
-  const [score, set_score] = useState(0);
+  const [score, set_score] = useState(1);
   const width = 10;
   let currentIndex = 0; 
   let appleIndex = 0; 
@@ -43,12 +43,17 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       currentSnake.forEach((index) =>
         tile_grid[index].classList.remove("snake")
       );
+      currentSnake.forEach((index) =>
+      tile_grid[index].classList.remove("head")
+    );
 
       tile_grid[appleIndex].classList.remove("apple");
       scoreDisplay.innerText = score;
       currentIndex = 0;
 
       currentSnake.forEach((index) => tile_grid[index].classList.add("snake"));
+      tile_grid.forEach((index) =>index.classList.remove("head"));
+
       moveOutcomes();
       if (!apple_present) {
         randomApple();
@@ -59,7 +64,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
 
 
   useEffect(() => {
-    if(inProgress && !showPlayerForm){
+    if(inProgress && !showPlayerForm && !gameOver){
      window.addEventListener('keydown', (e) => {
        let tile_grid = document.querySelectorAll(".tile");
  
@@ -76,7 +81,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
        set_direction(width); //if we press down, the snake head will instantly appear in the div ten divs from where you are now
      }
      })}
-   }, [inProgress]);
+   }, [inProgress,gameOver,showPlayerForm]);
    
   function randomApple() {
     let tile_grid = document.querySelectorAll(".tile");
@@ -119,6 +124,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       tile_grid[tail].classList.remove("snake"); //removes class of snake from the TAIL
 
       currentSnake.unshift(currentSnake[0] + direction) //gives direction to the head of the array
+      console.log( currentSnake[0] + direction)
+      tile_grid[currentSnake[0]].classList.remove("head"); //removes class of snake from the TAIL
+
       const scoreDisplay = document.querySelector(".score");
 
       //deals with snake getting apple
@@ -137,6 +145,9 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
 
         }
         snake_head.classList.add("snake");
+
+        tile_grid[currentSnake[0]].classList.add("head"); //removes class of snake from the TAIL
+
 
 
       }
