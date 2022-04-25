@@ -1,5 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Snake Game
 This a snake game. The goal is to direct a snake using the up, down, left and right arrows to food withouth hitting the boundaries of the box. After the game is over the player is presented with a form that allows them to save their score. There is also a page that contains a leaderboard, containing the scores of other players in descending order.
 
 Some of the code and ideas from this game are adapted from the the following [Free Code Cap Tutorial Video](https://www.youtube.com/watch?v=lhNdUVh3qCc&t=3s). 
