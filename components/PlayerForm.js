@@ -16,13 +16,13 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const [showPlayerForm, set_showPlayerForm] = useState(true);
   const [direction, set_direction] = useState(1);
   const [speed, set_speed] = useState(1000);
-  
+
   const [currentSnake, set_currentSnake] = useState([2, 1]);
   const [apple_present, set_apple_present] = useState(false);
   const [score, set_score] = useState(1);
   const width = 10;
-  let currentIndex = 0; 
-  let appleIndex = 0; 
+  let currentIndex = 0;
+  let appleIndex = 0;
 
   const game_timer = setTimeout(() => {
     if (inProgress) {
@@ -44,15 +44,15 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         tile_grid[index].classList.remove("snake")
       );
       currentSnake.forEach((index) =>
-      tile_grid[index].classList.remove("head")
-    );
+        tile_grid[index].classList.remove("head")
+      );
 
       tile_grid[appleIndex].classList.remove("apple");
       scoreDisplay.innerText = score;
       currentIndex = 0;
 
       currentSnake.forEach((index) => tile_grid[index].classList.add("snake"));
-      tile_grid.forEach((index) =>index.classList.remove("head"));
+      tile_grid.forEach((index) => index.classList.remove("head"));
 
       moveOutcomes();
       if (!apple_present) {
@@ -62,27 +62,27 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
     }
   }, [timer]);
 
-
   useEffect(() => {
-    if(inProgress && !showPlayerForm && !gameOver){
-     window.addEventListener('keydown', (e) => {
-       let tile_grid = document.querySelectorAll(".tile");
- 
- console.log(inProgress)
-     tile_grid[currentIndex].classList.remove("snake");
- 
-     if (e.keyCode === 39) {
-       set_direction(1); //if we press the right arrow on our keyboard, the snake will go right one
-     } else if (e.keyCode === 38) {
-       set_direction(-width); // if we press the up arrow, the snake will go back ten divs, appearing to go up
-     } else if (e.keyCode === 37) {
-       set_direction(-1); // if we press left, the snake will go left one div
-     } else if (e.keyCode === 40) {
-       set_direction(width); //if we press down, the snake head will instantly appear in the div ten divs from where you are now
-     }
-     })}
-   }, [inProgress,gameOver,showPlayerForm]);
-   
+    if (inProgress && !showPlayerForm && !gameOver) {
+      window.addEventListener("keydown", (e) => {
+        let tile_grid = document.querySelectorAll(".tile");
+
+        console.log(inProgress);
+        tile_grid[currentIndex].classList.remove("snake");
+
+        if (e.keyCode === 39) {
+          set_direction(1); //if we press the right arrow on our keyboard, the snake will go right one
+        } else if (e.keyCode === 38) {
+          set_direction(-width); // if we press the up arrow, the snake will go back ten divs, appearing to go up
+        } else if (e.keyCode === 37) {
+          set_direction(-1); // if we press left, the snake will go left one div
+        } else if (e.keyCode === 40) {
+          set_direction(width); //if we press down, the snake head will instantly appear in the div ten divs from where you are now
+        }
+      });
+    }
+  }, [inProgress, gameOver, showPlayerForm]);
+
   function randomApple() {
     let tile_grid = document.querySelectorAll(".tile");
     do {
@@ -95,7 +95,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
     setGameOver(false);
     setInprogress(true);
   };
-
 
   let tileGrid = tileArray.map((tile) => {
     return Tile(tile);
@@ -117,14 +116,14 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         clearTimeout(game_timer);
         endGame = true;
         setGameOver(true);
-        setStart_called(false)
+        setStart_called(false);
       }
 
       const tail = currentSnake.pop(); //removes last ite of the array and shows it
       tile_grid[tail].classList.remove("snake"); //removes class of snake from the TAIL
 
-      currentSnake.unshift(currentSnake[0] + direction) //gives direction to the head of the array
-      console.log( currentSnake[0] + direction)
+      currentSnake.unshift(currentSnake[0] + direction); //gives direction to the head of the array
+      console.log(currentSnake[0] + direction);
       tile_grid[currentSnake[0]].classList.remove("head"); //removes class of snake from the TAIL
 
       const scoreDisplay = document.querySelector(".score");
@@ -140,16 +139,12 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           currentSnake.push(tail);
           set_score(score + 1);
           scoreDisplay.textContent = score;
-          set_speed(speed * 0.95)
+          set_speed(speed * 0.95);
           clearTimeout(game_timer);
-
         }
         snake_head.classList.add("snake");
 
         tile_grid[currentSnake[0]].classList.add("head"); //removes class of snake from the TAIL
-
-
-
       }
     }
   }
@@ -164,7 +159,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           "Content-Type": contentType,
         },
         body: JSON.stringify({
-          player_name: player_name,
+          player_name: player_name != "" ? player_name: "Anonymous",
           score: score,
           score: score != "" ? score : "Draw",
         }),
@@ -177,7 +172,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
 
       router.push("/");
     } catch (error) {
-      alert ("Failed to add player");  
+      alert("Failed to add player");
     }
   };
 
@@ -197,14 +192,14 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   };
 
   return (
-    <div className="game">
+    <div className="">
       <h1 className="title">Snake Game</h1>
 
       <h1>
         <Link href="/">
           <button className="newFormButton">
             {" "}
-            <a>Leader Board</a>{" "}
+            <a>Score Board</a>{" "}
           </button>
         </Link>
       </h1>
@@ -222,7 +217,8 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
               result of this game.
             </h2>
             <label htmlFor="player">Player name</label>
-            <input
+            <textarea
+              id="name-area"
               type="text"
               name="player"
               value={player_name}
@@ -236,25 +232,23 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       ) : null}
 
       {!gameOver && !showPlayerForm ? (
-        <div >
-        
-            <button id="start" onClick={start}>
-              Start
-            </button>
-          
+        <div>
+          <button id="start" onClick={start}>
+            Start
+          </button>
+
           <h1 className="score">Score : </h1>
 
           {inProgress ? (
             <div id="tile-grid" className="grid">
               {tileGrid}
-
             </div>
           ) : null}
         </div>
       ) : null}
       {gameOver ? (
         <Form className="save-player" id={formId} onSubmit={handleSubmit}>
-          <p>Player : {player_name}</p>
+          <p>Player : {player_name != ""? player_name : "Anonymous" }</p>
 
           <p>Score : {score}</p>
           <p>{score}</p>
