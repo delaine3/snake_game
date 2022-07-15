@@ -36,6 +36,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       setInprogress(false);
     }
   }, [score, timer]);
+
   useEffect(() => {
     const scoreDisplay = document.querySelector(".score");
     let tile_grid = document.querySelectorAll(".tile");
@@ -67,7 +68,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       window.addEventListener("keydown", (e) => {
         let tile_grid = document.querySelectorAll(".tile");
 
-        console.log(inProgress);
+        console.log("IN PROGRESS? "+ inProgress);
         tile_grid[currentIndex].classList.remove("snake");
 
         if (e.keyCode === 39) {
@@ -81,7 +82,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         }
       });
     }
-
   }, [inProgress, gameOver, showPlayerForm]);
 
   function randomApple() {
@@ -233,6 +233,11 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       ) : null}
       {!gameOver && !showPlayerForm ? (
         <div>
+          <p>
+            Use the colorful navigatipn buttons below or use your keyboard
+            &#8592; &#x2193; &#8594; &#8593; keys to move the snake. Tap the start button to begin. Try not to hit
+            the walls!
+          </p>
           <button id="start" onClick={start}>
             Start
           </button>
@@ -243,21 +248,32 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
                 {tileGrid}
               </div>
               <div className="navigation-buttons">
-                <button onClick={()=>set_direction(-width)} className="nav-btn" id="up">
+                <button
+                  onClick={() => set_direction(-1)}
+                  className="nav-btn"
+                  id="left"
+                >
+                  &#8592;
+                </button>
+                <button
+                  onClick={() => set_direction(-width)}
+                  className="nav-btn"
+                  id="up"
+                >
                   &#8593;
                 </button>
                 <button
-                  onClick={()=>set_direction(width)}
+                  onClick={() => set_direction(width)}
                   className="nav-btn"
                   id="down"
                 >
-                  <p> &#x2193;</p>
+                   &#x2193;
                 </button>
-                <button onClick={()=>set_direction(-1)} className="nav-btn" id="left">
-                  &#8592;
-                </button>
-
-                <button onClick={()=> set_direction(1)} className="nav-btn" id="right">
+                <button
+                  onClick={() => set_direction(1)}
+                  className="nav-btn"
+                  id="right"
+                >
                   &#8594;
                 </button>
               </div>

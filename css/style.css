@@ -83,7 +83,11 @@ ul {
 }
 
 .score {
+  background-color: rgba(217, 255, 228, 0.699);
+  box-shadow: 0 0 1vw 1vw rgba(217, 255, 228, 0.699);
+
   display: flex;
+  width: fit-content;
   grid-template-columns: auto auto;
   margin-left: auto;
   margin-right: auto;
@@ -127,11 +131,17 @@ ul {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   }
+  
 }
 .navigation-buttons {
   display: flex;
+  margin: auto;
+  width: fit-content;
+  background-color: #000000;
 }
 #start {
+  margin-left: 30px;
+
   background-color: #08f12fb4;
 }
 button {
@@ -182,38 +192,48 @@ label {
   background-size: contain;
   border-radius: 20px;
 }
+p {
+  width: 90%;
+  padding: 20px;
+  margin: auto;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  background-color: rgba(217, 255, 228, 0.767);
+  box-shadow: 0 0 1vw 1vw rgba(217, 255, 228, 0.699);
+}
 #down {
   background-repeat: no-repeat;
-
-  background-color: #00ffff;
+  color: #ffffff;
+  background-color: #3a86ff;
   background-size: contain;
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
 }
 
 #left {
   background-repeat: no-repeat;
-
-  background-color: #fbff00;
+  color: #ffffff;
+  background-color: #ffbe0b;
   background-size: contain;
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
 }
 #up {
   background-repeat: no-repeat;
-
-  background-color: #0044ff;
+  color: #ffffff;
+  background-color: #ff006e;
   background-size: contain;
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
 }
 #right {
   background-repeat: no-repeat;
-
-  background-color: #ff00d4;
+  color: #ffffff;
+  background-color: #8338ec;
   background-size: contain;
-  width: 100px;
-  height: 100px;
+  width: 10vw;
+  height: 10vw;
 }
 .apple {
   background-size: contain;
