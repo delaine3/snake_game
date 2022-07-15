@@ -110,7 +110,12 @@ ul {
     width: 130px;
     margin: 15px;
   }
-
+  .title {
+    font-size: 20px;
+    box-shadow: 0 0 1vw 1vw #ffffff8f;
+    margin: auto;
+    background-color: rgba(217, 255, 228, 0.493);
+  }
   #tile-grid {
     padding: 0;
     margin: auto;
@@ -140,7 +145,7 @@ label {
   font-size: larger;
 }
 .title {
-  font-size: 2vw;
+  font-size: 70px;
   box-shadow: 0 0 1vw 1vw #ffffff8f;
   margin: auto;
   background-color: rgba(217, 255, 228, 0.493);
@@ -164,12 +169,15 @@ label {
 }
 
 .snake {
+  border: 1px green;
   background-color: greenyellow;
   border-radius: 20px;
 }
 
 .head {
   background-repeat: no-repeat;
+  border: 1px green;
+
   background-image: url("https://image.pngaaa.com/921/89921-small.png");
   background-size: contain;
   border-radius: 20px;
