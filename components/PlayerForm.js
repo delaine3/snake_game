@@ -68,7 +68,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       window.addEventListener("keydown", (e) => {
         let tile_grid = document.querySelectorAll(".tile");
 
-        console.log("IN PROGRESS? "+ inProgress);
+        console.log("IN PROGRESS? " + inProgress);
         tile_grid[currentIndex].classList.remove("snake");
 
         if (e.keyCode === 39) {
@@ -124,7 +124,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
       tile_grid[tail].classList.remove("snake"); //removes class of snake from the TAIL
 
       currentSnake.unshift(currentSnake[0] + direction); //gives direction to the head of the array
-      console.log(currentSnake[0] + direction);
+      // console.log(currentSnake[0] + direction);
       tile_grid[currentSnake[0]].classList.remove("head"); //removes class of snake from the TAIL
 
       const scoreDisplay = document.querySelector(".score");
@@ -207,11 +207,6 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
 
       {showPlayerForm ? (
         <div>
-          <h1>
-            <button onClick={start} className="newFormButton">
-              <a>New Game</a>
-            </button>
-          </h1>
           <Form className="save-player" id={formId}>
             <h2>
               Type in the name of the player if you would you like to save the
@@ -235,8 +230,8 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         <div>
           <p>
             Use the colorful navigatipn buttons below or use your keyboard
-            &#8592; &#x2193; &#8594; &#8593; keys to move the snake. Tap the start button to begin. Try not to hit
-            the walls!
+            &#8592; &#8593; &#x2193; &#8594; keys to move the snake. Tap the
+            start button to begin. Try not to hit the walls!
           </p>
           <button id="start" onClick={start}>
             Start
@@ -267,7 +262,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
                   className="nav-btn"
                   id="down"
                 >
-                   &#x2193;
+                  &#x2193;
                 </button>
                 <button
                   onClick={() => set_direction(1)}
