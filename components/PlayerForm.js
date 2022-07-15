@@ -81,6 +81,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
         }
       });
     }
+
   }, [inProgress, gameOver, showPlayerForm]);
 
   function randomApple() {
@@ -159,7 +160,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           "Content-Type": contentType,
         },
         body: JSON.stringify({
-          player_name: player_name != "" ? player_name: "Anonymous",
+          player_name: player_name != "" ? player_name : "Anonymous",
           score: score,
           score: score != "" ? score : "Draw",
         }),
@@ -230,25 +231,43 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
           </Form>
         </div>
       ) : null}
-
       {!gameOver && !showPlayerForm ? (
         <div>
           <button id="start" onClick={start}>
             Start
           </button>
-
           <h1 className="score">Score : </h1>
-
           {inProgress ? (
-            <div id="tile-grid" className="grid">
-              {tileGrid}
+            <div>
+              <div id="tile-grid" className="grid">
+                {tileGrid}
+              </div>
+              <div className="navigation-buttons">
+                <button onClick={()=>set_direction(-width)} className="nav-btn" id="up">
+                  &#8593;
+                </button>
+                <button
+                  onClick={()=>set_direction(width)}
+                  className="nav-btn"
+                  id="down"
+                >
+                  <p> &#x2193;</p>
+                </button>
+                <button onClick={()=>set_direction(-1)} className="nav-btn" id="left">
+                  &#8592;
+                </button>
+
+                <button onClick={()=> set_direction(1)} className="nav-btn" id="right">
+                  &#8594;
+                </button>
+              </div>
             </div>
           ) : null}
         </div>
       ) : null}
       {gameOver ? (
         <Form className="save-player" id={formId} onSubmit={handleSubmit}>
-          <p>Player : {player_name != ""? player_name : "Anonymous" }</p>
+          <p>Player : {player_name != "" ? player_name : "Anonymous"}</p>
 
           <p>Score : {score}</p>
           <p>{score}</p>

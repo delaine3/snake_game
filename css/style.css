@@ -70,7 +70,6 @@ h2 {
   width: 90%;
 }
 
-
 .score-board {
   width: 50%;
   min-width: min-content;
@@ -101,7 +100,6 @@ ul {
   margin: 15px;
 }
 @media only screen and (max-width: 600px) {
-
   .score-board {
     width: 100%;
     min-width: min-content;
@@ -124,7 +122,9 @@ ul {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
   }
-
+}
+.navigation-buttons {
+  display: flex;
 }
 #start {
   background-color: #08f12fb4;
@@ -174,7 +174,39 @@ label {
   background-size: contain;
   border-radius: 20px;
 }
+#down {
+  background-repeat: no-repeat;
 
+  background-color: #00ffff;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+}
+
+#left {
+  background-repeat: no-repeat;
+
+  background-color: #fbff00;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+}
+#up {
+  background-repeat: no-repeat;
+
+  background-color: #0044ff;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+}
+#right {
+  background-repeat: no-repeat;
+
+  background-color: #ff00d4;
+  background-size: contain;
+  width: 100px;
+  height: 100px;
+}
 .apple {
   background-size: contain;
   background-image: url("https://freepngimg.com/thumb/apple/4-png-apple-image-clipart-transparent-png-apple-thumb.png");
@@ -190,8 +222,8 @@ label {
 .tile {
   height: 7vw;
   width: 7vw;
-  max-width: 95px;
-  max-height: 95px;
+  max-width: 85px;
+  max-height: 85px;
 }
 
 .headers h2 {
