@@ -207,8 +207,8 @@ p {
   color: #ffffff;
   background-color: #3a86ff;
   background-size: contain;
-  width: 10vw;
-  height: 10vw;
+  width: 15vw;
+  height: 15vw;
 }
 
 #left {
@@ -216,24 +216,24 @@ p {
   color: #ffffff;
   background-color: #ffbe0b;
   background-size: contain;
-  width: 10vw;
-  height: 10vw;
+  width: 15vw;
+  height: 15vw;
 }
 #up {
   background-repeat: no-repeat;
   color: #ffffff;
   background-color: #ff006e;
   background-size: contain;
-  width: 10vw;
-  height: 10vw;
+  width: 15vw;
+  height: 15vw;
 }
 #right {
   background-repeat: no-repeat;
   color: #ffffff;
   background-color: #8338ec;
   background-size: contain;
-  width: 10vw;
-  height: 10vw;
+  width: 15vw;
+  height: 15vw;
 }
 .apple {
   background-size: contain;
