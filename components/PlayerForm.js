@@ -9,7 +9,7 @@ const PlayerForm = ({ formId, fornewPlayer = true }) => {
   const contentType = "application/json";
 
   const [inProgress, setInprogress] = useState(false);
-  const [player_name, set_player_name] = useState("");
+  const [player_name, set_player_name] = useState("Anonymous");
   const [gameOver, setGameOver] = useState(false);
   const [timer, setTimer] = useState(0);
   const [start_called, setStart_called] = useState(false);
